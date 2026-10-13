@@ -1,0 +1,112 @@
+html, body { height: 100%; margin: 0; }
+
+body {
+  background: #0b0d12;
+  color: #d7dce6;
+  font: 14px/1.6 "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
+}
+
+#app { display: flex; height: 100%; }
+
+#panel {
+  width: 300px;
+  min-width: 300px;
+  padding: 14px 16px;
+  background: #12151d;
+  border-right: 1px solid #232838;
+  overflow-y: auto;
+}
+
+#panel h1 { font-size: 17px; margin: 4px 0 12px; }
+
+#panel h2 {
+  font-size: 12px;
+  color: #8f9bb3;
+  margin: 16px 0 6px;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+}
+
+#sceneButtons { display: flex; flex-direction: column; gap: 6px; }
+
+#sceneButtons button {
+  text-align: left;
+  background: #1b2030;
+  color: #d7dce6;
+  border: 1px solid #2a3247;
+  border-radius: 6px;
+  padding: 7px 10px;
+  cursor: pointer;
+}
+
+#sceneButtons button:hover { background: #232a3f; }
+#sceneButtons button.active { background: #2b62d9; border-color: #2b62d9; color: #fff; }
+
+label { display: block; margin: 9px 0; }
+label.check { display: flex; align-items: center; gap: 7px; }
+label.check input { accent-color: #2b62d9; }
+
+input[type="range"] { width: 100%; accent-color: #2b62d9; }
+
+select {
+  width: 100%;
+  margin-top: 3px;
+  background: #1b2030;
+  color: #d7dce6;
+  border: 1px solid #2a3247;
+  border-radius: 6px;
+  padding: 4px 6px;
+}
+
+button {
+  background: #1b2030;
+  color: #d7dce6;
+  border: 1px solid #2a3247;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  margin-top: 4px;
+}
+
+button:hover { background: #232a3f; }
+
+.hint { color: #77839c; font-size: 12px; margin: 6px 0; }
+.hidden { display: none !important; }
+
+#stage { flex: 1; position: relative; min-width: 0; }
+
+#glcanvas { width: 100%; height: 100%; display: block; cursor: grab; }
+#glcanvas:active { cursor: grabbing; }
+
+#status {
+  position: absolute;
+  left: 10px;
+  top: 8px;
+  background: rgba(10, 12, 18, .72);
+  border: 1px solid #232838;
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  color: #aab4c8;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+/* 下拉框被禁用时的样式 */
+select:disabled {
+    opacity: 0.5;              /* 整体半透明，看起来就是灰的 */
+    background: #12151d;     /* 更深一点的背景色，和面板底色融合 */
+    color: #5a6378;          /* 文字变成暗灰色 */
+    cursor: not-allowed;       /* 鼠标移上去显示禁止图标 */
+    border-color: #1a1f2e;   /* 边框变暗 */
+}
+
+#help {
+  margin-top: 16px;
+  padding-top: 10px;
+  border-top: 1px solid #232838;
+  color: #8f9bb3;
+  font-size: 12px;
+}
+
+span[id$="Val"] { color: #7cc7ff; font-variant-numeric: tabular-nums; }

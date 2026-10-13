@@ -1,0 +1,122 @@
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AP1·交互式2D分形</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <aside id="panel">
+    <h1>AP1 · 交互式分形</h1>
+    <div id="sceneButtons">
+      <button data-scene="sierpinski" class="active">① Sierpinski 垫片</button>
+      <button data-scene="explorer">②分形探索器</button>
+      <button data-scene="gasket">③ 3D四面体垫片</button>
+    </div>
+
+    <!-- ============ 场景一：Sierpinski 面板 ============ -->
+    <section id="sec-sierpinski">
+      <h2>垫片参数</h2>
+      <label>生成方式
+        <select id="genMethod">
+          <option value="chaos">混沌游戏</option>
+          <option value="recursive">递归细分</option>
+        </select>
+      </label>
+      <div id="chaosControls">
+        <label>顶点数 <span id="pointCountVal"></span>
+          <input type="range" id="pointCount" min="5000" max="100000" step="1000" value="20000">
+        </label>
+        <label>多边形边数 n <span id="polySidesVal"></span>
+          <input type="range" id="polySides" min="3" max="10" step="1" value="3">
+        </label>
+        <label>顶点选取规则
+          <select id="chaosRule">
+            <option value="free">完全随机</option>
+            <option value="noAdjacent">禁止重复及相邻</option>
+            <option value="noRepeat">仅禁止重复上一顶点</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="growAnim" checked> 逐点生长动画（空格暂停/继续）</label>
+        <button id="regen">重新生成随机序列</button>
+      </div>
+      <div id="recControls" class="hidden">
+        <label>递归深度 <span id="recDepthVal"></span>
+          <input type="range" id="recDepth" min="0" max="6" step="1" value="4">
+        </label>
+        <p class="hint">"多边形边数 n"滑块同样作用于递归细分（n 边形垫片推广）；n 较大时递归深度上限会自动降低以防图元过多。</p>
+      </div>
+      <label>渲染模式
+        <select id="renderMode">
+          <option value="points">点云 gl.POINTS</option>
+          <option value="lines">线框 gl.LINES</option>
+          <option value="solid">实体 gl.TRIANGLES</option>
+        </select>
+      </label>
+      <label>点大小 <span id="pointSizeVal"></span>
+        <input type="range" id="pointSize" min="1" max="10" step="0.5" value="2">
+      </label>
+      <label>配色方案
+        <select id="colorScheme"></select>
+      </label>
+    </section>
+
+      <!-- ============ 场景二：Mandelbrot 面板 ============ -->
+    <section id="sec-explorer" class="hidden">
+      <h2>分形探索器</h2>
+
+      <label>最大迭代次数 <span id="maxIterVal"></span>
+        <input type="range" id="maxIter" min="100" max="3000" step="50" value="300">
+      </label>
+      <label>配色映射
+        <select id="expPalette">
+          <option value="0">岩溶红</option>
+          <option value="1">海洋蓝</option>
+          <option value="2">霓虹紫青</option>
+          <option value="3">单色白</option>
+        </select>
+      </label>
+      <button id="resetView">重置视图</button>
+      <p class="hint">左键拖动平移，滚轮以光标为中心缩放。</p>
+    </section>
+
+    <!-- ============ 场景三：3D 四面体面板 ============ -->
+    <section id="sec-gasket" class="hidden">
+      <h2>3D 四面体垫片</h2>
+      <label>细分深度 <span id="gasketDepthVal"></span>
+        <input type="range" id="gasketDepth" min="0" max="5" step="1" value="3">
+      </label>
+      <label>配色
+        <select id="gasketColor">
+          <option value="0">单色（Lambert 明暗）</option>
+          <option value="1">四角色</option>
+          <option value="2">高度渐变</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" id="autoRotate" checked> 自动旋转（空格暂停/继续）</label>
+      <p class="hint">左键拖动旋转视角，滚轮推拉相机。本场景为 AP2 三维渲染的铺垫。</p>
+    </section>
+
+    <footer id="help"></footer>
+  </aside>
+
+  <main id="stage">
+    <canvas id="glcanvas"></canvas>
+    <div id="status"></div>
+  </main>
+</div>
+
+<!-- 工具库 -->
+<script src="Common/webgl-utils.js"></script>
+<script src="Common/initShaders.js"></script>
+<script src="Common/MV.js"></script>
+<!-- 应用代码：几何 / 交互 / UI 分文件 -->
+<script src="js/viewport.js"></script>
+<script src="js/sierpinski.js"></script>
+<script src="js/explorer.js"></script>
+<script src="js/gasket.js"></script>
+<script src="js/ui.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>
